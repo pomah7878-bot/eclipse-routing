@@ -1,0 +1,29 @@
+{
+  "Name": "ECLIPSE RU",
+  "GlobalProxy": "true",
+  "UseChunkFiles": "true",
+  "RemoteDNSType": "DoH",
+  "RemoteDNSDomain": "https://8.8.8.8/dns-query",
+  "RemoteDNSIP": "8.8.8.8",
+  "DomesticDNSType": "DoH",
+  "DomesticDNSDomain": "https://77.88.8.8/dns-query",
+  "DomesticDNSIP": "77.88.8.8",
+  "Geoipurl": "https://raw.githubusercontent.com/pomah7878-bot/eclipse-routing/main/geo/geoip.dat",
+  "Geositeurl": "https://raw.githubusercontent.com/pomah7878-bot/eclipse-routing/main/geo/geosite.dat",
+  "RouteOrder": "block-proxy-direct",
+  "DirectSites": [
+    "geosite:private",
+    "geosite:category-ru",
+    "geosite:whitelist"
+  ],
+  "DirectIp": [
+    "geoip:private",
+    "geoip:direct"
+  ],
+  "ProxySites": [],
+  "ProxyIp": [],
+  "BlockSites": [],
+  "BlockIp": [],
+  "DomainStrategy": "IPIfNonMatch",
+  "FakeDNS": "false"
+}
