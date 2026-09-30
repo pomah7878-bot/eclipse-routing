@@ -14,16 +14,52 @@
   "DirectSites": [
     "geosite:private",
     "geosite:category-ru",
-    "geosite:whitelist"
+    "geosite:whitelist",
+    "geosite:microsoft",
+    "geosite:apple",
+    "geosite:epicgames",
+    "geosite:riot",
+    "geosite:escapefromtarkov",
+    "geosite:steam",
+    "geosite:origin",
+    "geosite:twitch",
+    "geosite:pinterest",
+    "geosite:faceit"
   ],
   "DirectIp": [
     "geoip:private",
     "geoip:direct"
   ],
-  "ProxySites": [],
-  "ProxyIp": [],
-  "BlockSites": [],
+  "ProxySites": [
+    "geosite:google-play",
+    "geosite:google-deepmind",
+    "geosite:github",
+    "geosite:twitch-ads",
+    "geosite:youtube",
+    "geosite:telegram",
+    "geosite:discord",
+    "geosite:ai",
+    "geosite:category-geoblock-ru"
+  ],
+  "ProxyIp": [
+    "geoip:telegram",
+    "geoip:discord"
+  ],
+  "BlockSites": [
+    "geosite:win-spy",
+    "geosite:torrent",
+    "geosite:category-ads"
+  ],
   "BlockIp": [],
   "DomainStrategy": "IPIfNonMatch",
-  "FakeDNS": "false"
+  "FakeDNS": "false",
+  "DnsHosts": {
+    "lkfl2.nalog.ru": "213.24.64.175",
+    "lknpd.nalog.ru": "213.24.64.181",
+    "dns.google": "8.8.8.8",
+    "cloudflare-dns.com": "1.1.1.1"
+  },
+  "RemoteDns": "8.8.8.8",
+  "DomesticDns": "77.88.8.8",
+  "LastUpdated": "1790770572"
 }

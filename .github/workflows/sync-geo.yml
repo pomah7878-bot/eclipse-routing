@@ -1,0 +1,31 @@
+name: Sync geo from upstream
+on:
+  schedule:
+    - cron: "40 0 * * *"   # каждый день 03:40 МСК
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch upstream release
+        run: |
+          git clone --depth 1 --branch release https://github.com/mvrvntn/routing /tmp/up
+          for f in geoip.dat geosite.dat; do
+            s=$(stat -c %s /tmp/up/$f)
+            [ "$s" -gt 20000 ] || { echo "$f подозрительно мал ($s)"; exit 1; }
+            cp /tmp/up/$f geo/$f
+          done
+          echo "geoip: $(stat -c %s geo/geoip.dat) B, geosite: $(stat -c %s geo/geosite.dat) B"
+          # предохранитель: не раздуваем базу (лимит памяти туннеля Happ)
+          [ "$(stat -c %s geo/geosite.dat)" -lt 200000 ] || { echo "geosite слишком большой"; exit 1; }
+      - name: Commit
+        run: |
+          git config user.name "eclipse-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add geo
+          git diff --cached --quiet && { echo "без изменений"; exit 0; }
+          git commit -m "geo: sync from mvrvntn/routing $(date -u +%F)"
+          git push
