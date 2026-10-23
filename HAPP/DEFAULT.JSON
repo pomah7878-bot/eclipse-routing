@@ -28,7 +28,8 @@
   ],
   "DirectIp": [
     "geoip:private",
-    "geoip:direct"
+    "geoip:direct",
+    "geoip:whitelist"
   ],
   "ProxySites": [
     "geosite:google-play",
@@ -61,5 +62,5 @@
   },
   "RemoteDns": "8.8.8.8",
   "DomesticDns": "77.88.8.8",
-  "LastUpdated": "1790770572"
+  "LastUpdated": "1792788606"
 }
