@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Fetch upstream release
         run: |
           git clone --depth 1 --branch release https://github.com/mvrvntn/routing /tmp/up
@@ -28,4 +30,5 @@ jobs:
           git add geo
           git diff --cached --quiet && { echo "без изменений"; exit 0; }
           git commit -m "geo: sync from mvrvntn/routing $(date -u +%F)"
-          git push
+          git pull --rebase origin main
+          git push origin HEAD:main
