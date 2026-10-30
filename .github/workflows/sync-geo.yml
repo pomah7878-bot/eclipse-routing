@@ -14,6 +14,7 @@ jobs:
           ref: main
       - name: Fetch upstream release
         run: |
+          mkdir -p /tmp/prev && cp geo/*.dat /tmp/prev/
           git clone --depth 1 --branch release https://github.com/mvrvntn/routing /tmp/up
           for f in geoip.dat geosite.dat; do
             s=$(stat -c %s /tmp/up/$f)
@@ -23,6 +24,8 @@ jobs:
           echo "geoip: $(stat -c %s geo/geoip.dat) B, geosite: $(stat -c %s geo/geosite.dat) B"
           # предохранитель: не раздуваем базу (лимит памяти туннеля Happ)
           [ "$(stat -c %s geo/geosite.dat)" -lt 200000 ] || { echo "geosite слишком большой"; exit 1; }
+      - name: Validate geo and profiles
+        run: python3 scripts/validate.py /tmp/prev
       - name: Commit
         run: |
           git config user.name "eclipse-bot"
